@@ -1,0 +1,30 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": ["_id", "name", "lang", "mode", "ruleSetId", "hostUserId", "players", "mj", "status", "createdAt", "updatedAt", "version"],
+      "properties": {
+        "_id": { "bsonType": "string", "description": "ex: party_xxx", "pattern": "^party_" },
+        "name": { "bsonType": "string", "minLength": 1 },
+        "lang": { "bsonType": "string" },
+        "mode": { "enum": ["strict", "relaxed"] },
+        "ruleSetId": { "bsonType": "string" },
+        "customRules": { "bsonType": ["object", "null"] },
+        "hostUserId": { "bsonType": "string" },
+        "players": { "bsonType": "array", "items": { "bsonType": "string" } },
+        "mj": {
+          "bsonType": "object",
+          "required": ["type"],
+          "properties": {
+            "type": { "enum": ["ai", "human"] },
+            "personaId": { "bsonType": ["string", "null"] }
+          }
+        },
+        "status": { "enum": ["preparing", "active", "paused", "ended"] },
+        "createdAt": { "bsonType": "string" },
+        "updatedAt": { "bsonType": "string" },
+        "version": { "bsonType": "int", "minimum": 0 }
+      },
+      "additionalProperties": true
+    }
+  }
+  

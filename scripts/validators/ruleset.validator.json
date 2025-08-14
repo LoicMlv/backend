@@ -1,0 +1,33 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": ["_id", "name", "engine", "schemaVersion", "definitions"],
+      "properties": {
+        "_id": { "bsonType": "string", "pattern": "^rules_" },
+        "name": { "bsonType": "string" },
+        "engine": { "bsonType": "string" },
+        "schemaVersion": { "bsonType": "int", "minimum": 1 },
+        "definitions": {
+          "bsonType": "object",
+          "required": ["attributes", "dice", "actions", "damageTypes", "initiative", "difficultyScale"],
+          "properties": {
+            "attributes": { "bsonType": "array", "items": { "bsonType": "string" } },
+            "skills": { "bsonType": "array", "items": { "bsonType": "string" } },
+            "dice": { "bsonType": "array", "items": { "enum": ["d4","d6","d8","d10","d12","d20","d100"] } },
+            "actions": { "bsonType": "array", "items": { "enum": ["attack","skill_check","cast","defend","use_item","move"] } },
+            "damageTypes": { "bsonType": "array", "items": { "bsonType": "string" } },
+            "initiative": {
+              "bsonType": "object",
+              "required": ["type"],
+              "properties": { "type": { "bsonType": "string" } }
+            },
+            "difficultyScale": { "bsonType": "object" }
+          }
+        },
+        "validators": { "bsonType": "object" },
+        "lootTables": { "bsonType": "object" }
+      },
+      "additionalProperties": true
+    }
+  }
+  

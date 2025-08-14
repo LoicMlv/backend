@@ -1,0 +1,131 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": ["_id", "partyId", "name", "concept", "level", "stats", "skills", "inventory", "money", "version", "updatedAt"],
+      "properties": {
+        "_id": { "bsonType": "string", "pattern": "^char_" },
+        "partyId": { "bsonType": "string", "pattern": "^party_" },
+        "ownerUserId": { "bsonType": ["string", "null"] },
+        "name": { "bsonType": "string", "minLength": 1 },
+        "concept": { "bsonType": "string", "minLength": 1 },
+        "class": { "bsonType": ["string", "null"] },
+        "level": { "bsonType": "int", "minimum": 1 },
+        "alignment": { "bsonType": ["string", "null"] },
+        "stats": {
+          "bsonType": "array",
+          "minItems": 1,
+          "items": {
+            "bsonType": "object",
+            "required": ["name", "label", "value"],
+            "properties": {
+              "name": { "bsonType": "string" },
+              "label": { "bsonType": "string" },
+              "description": { "bsonType": "string" },
+              "value": { "bsonType": ["int", "double"] },
+              "min": { "bsonType": ["int", "double"] },
+              "max": { "bsonType": ["int", "double"] }
+            },
+            "additionalProperties": true
+          }
+        },
+        "skills": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "object",
+            "required": ["name", "label", "value"],
+            "properties": {
+              "name": { "bsonType": "string" },
+              "label": { "bsonType": "string" },
+              "value": { "bsonType": ["int", "double"] }
+            },
+            "additionalProperties": true
+          }
+        },
+        "abilities": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "object",
+            "required": ["abilityId", "rank", "source"],
+            "properties": {
+              "abilityId": { "bsonType": "string" },
+              "rank": { "bsonType": "int", "minimum": 0 },
+              "source": { "enum": ["class", "talent", "item", "other"] }
+            },
+            "additionalProperties": true
+          }
+        },
+        "inventory": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "object",
+            "required": ["id", "name", "qty"],
+            "properties": {
+              "id": { "bsonType": "string" },
+              "name": { "bsonType": "string" },
+              "qty": { "bsonType": "int", "minimum": 0 },
+              "stats": { "bsonType": "object" },
+              "tags": { "bsonType": "array", "items": { "bsonType": "string" } }
+            },
+            "additionalProperties": true
+          }
+        },
+        "money": {
+          "bsonType": "object",
+          "properties": {
+            "gold": { "bsonType": "int", "minimum": 0 },
+            "silver": { "bsonType": "int", "minimum": 0 },
+            "copper": { "bsonType": "int", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "modifiers": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "object",
+            "required": ["id", "source", "target", "op", "value"],
+            "properties": {
+              "id": { "bsonType": "string" },
+              "source": { "bsonType": "string" },
+              "target": {
+                "bsonType": "object",
+                "required": ["type", "match"],
+                "properties": {
+                  "type": { "enum": ["stat", "skill", "roll", "damage", "other"] },
+                  "match": { "bsonType": "object" }
+                }
+              },
+              "op": { "enum": ["add", "mul", "set"] },
+              "value": { "bsonType": ["int", "double"] },
+              "duration": {
+                "bsonType": "object",
+                "properties": {
+                  "type": { "enum": ["encounter", "turns", "session", "permanent"] },
+                  "turns": { "bsonType": "int", "minimum": 1 }
+                }
+              },
+              "stacking": { "enum": ["stackable", "unique"] }
+            },
+            "additionalProperties": true
+          }
+        },
+        "conditions": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "object",
+            "required": ["key"],
+            "properties": {
+              "key": { "bsonType": "string" },
+              "severity": { "bsonType": "int", "minimum": 0 },
+              "notes": { "bsonType": "string" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "tags": { "bsonType": "array", "items": { "bsonType": "string" } },
+        "version": { "bsonType": "int", "minimum": 0 },
+        "updatedAt": { "bsonType": "string" }
+      },
+      "additionalProperties": true
+    }
+  }
+  

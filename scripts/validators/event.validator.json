@@ -1,0 +1,41 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": ["_id", "partyId", "sessionId", "type", "causedBy", "createdAt"],
+      "properties": {
+        "_id": { "bsonType": "string", "pattern": "^evt_" },
+        "partyId": { "bsonType": "string", "pattern": "^party_" },
+        "sessionId": { "bsonType": "string", "pattern": "^sess_" },
+        "type": { "enum": ["action.resolved","system","narration","state.patch"] },
+        "action": {
+          "bsonType": "object",
+          "properties": {
+            "type": { "enum": ["attack","skill_check","cast","defend","use_item","move"] },
+            "actorId": { "bsonType": "string" },
+            "targetId": { "bsonType": "string" },
+            "params": { "bsonType": "object" },
+            "context": { "bsonType": "object" }
+          }
+        },
+        "result": {
+          "bsonType": "object",
+          "properties": {
+            "hit": { "bsonType": "bool" },
+            "roll": { "bsonType": ["int","double"] },
+            "damage": {
+              "bsonType": "object",
+              "properties": {
+                "amount": { "bsonType": ["int","double"] },
+                "type": { "bsonType": "string" }
+              }
+            }
+          }
+        },
+        "appliedState": { "bsonType": "object" },
+        "causedBy": { "bsonType": "string" },
+        "createdAt": { "bsonType": "string" }
+      },
+      "additionalProperties": true
+    }
+  }
+  

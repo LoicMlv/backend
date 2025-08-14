@@ -1,0 +1,16 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": ["_id", "partyId", "sessionId", "indexUntilEventId", "state", "createdAt"],
+      "properties": {
+        "_id": { "bsonType": "string", "pattern": "^snap_" },
+        "partyId": { "bsonType": "string", "pattern": "^party_" },
+        "sessionId": { "bsonType": "string", "pattern": "^sess_" },
+        "indexUntilEventId": { "bsonType": "string", "pattern": "^evt_" },
+        "state": { "bsonType": "object" },
+        "createdAt": { "bsonType": "string" }
+      },
+      "additionalProperties": true
+    }
+  }
+  
