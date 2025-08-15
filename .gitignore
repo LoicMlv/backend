@@ -1,0 +1,39 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build & cache
+dist/
+build/
+.cache/
+coverage/
+.tmp/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+
+# Docker / Local dev
+docker/data/
+docker/tmp/
+docker/logs/
+
+# Tests
+test-results/
