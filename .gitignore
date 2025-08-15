@@ -37,3 +37,7 @@ docker/logs/
 
 # Tests
 test-results/
+
+.env
+.env.*
+!.env.example
